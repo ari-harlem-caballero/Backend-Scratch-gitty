@@ -22,7 +22,7 @@ describe('alchemy-app routes', () => {
     );
   });
 
-  it('it should be able to sign in and redirect users back to dashboard', async () => {
+  it('it should be able to sign in and redirect users to /posts', async () => {
     const req = await request
       .agent(app)
       .get('/api/v1/github/login/callback?code=42')
@@ -32,7 +32,25 @@ describe('alchemy-app routes', () => {
       id: expect.any(String),
       username: 'ari_is_best',
       email: 'gotcha@fake.com',
-      avatar_url: expect.any(String)
+      avatarURL: expect.any(String),
+      exp: expect.any(String),
+      iat: expect.any(String)
+    });
+  });
+
+  it('should be able to delete a users cookie/logs out', async () => {
+    const agent = request.agent(app);
+    
+    await agent
+      .get('/api/v1/github/login/callback?code=42')
+      .redirects(1);
+
+    const res = await agent
+      .delete('/api/v1/github');
+
+    expect(res.body).toEqual({
+      message: 'Signed out successfully!',
+      success: true,
     });
   });
 });
