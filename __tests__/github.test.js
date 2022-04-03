@@ -3,6 +3,8 @@ const setup = require('../data/setup');
 const request = require('supertest');
 const app = require('../lib/app');
 
+jest.mock('../lib/utils/github');
+
 describe('alchemy-app routes', () => {
   beforeEach(() => {
     return setup(pool);
@@ -21,11 +23,16 @@ describe('alchemy-app routes', () => {
   });
 
   it('it should be able to sign in and redirect users back to dashboard', async () => {
-    const res = await request
+    const req = await request
       .agent(app)
       .get('/api/v1/github/login/callback?code=42')
       .redirects(1);
-      
-    expect(res.req.path).toEqual('/api/v1/posts');
+
+    expect(req.body).toEqual({
+      id: expect.any(String),
+      username: 'ari_is_best',
+      email: 'gotcha@fake.com',
+      avatar_url: expect.any(String)
+    });
   });
 });
