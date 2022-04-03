@@ -14,12 +14,11 @@ CREATE TABLE posts (
   id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
   title TEXT NOT NULL,
   text VARCHAR(255) NOT NULL,
-  username TEXT REFERENCES users(username),
   created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
 );
 
 INSERT INTO 
-  posts (post)
+  posts (title, text)
 VALUES 
-  ('Oh my glob, I love to post.'), 
-  ('Butts.');
+  ('My first post', 'Oh my glob, I love to post.'), 
+  ('Follow-up post', 'Butts.');
