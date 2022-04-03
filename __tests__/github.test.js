@@ -19,5 +19,13 @@ describe('alchemy-app routes', () => {
       /https:\/\/github.com\/login\/oauth\/authorize\?client_id=[\w\d]+&scope=user&redirect_uri=http:\/\/localhost:7890\/api\/v1\/github\/login\/callback/i
     );
   });
-  
+
+  it('it should be able to sign in and redirect users back to dashboard', async () => {
+    const res = await request
+      .agent(app)
+      .get('/api/v1/github/login/callback?code=42')
+      .redirects(1);
+      
+    expect(res.req.path).toEqual('/api/v1/posts');
+  });
 });
