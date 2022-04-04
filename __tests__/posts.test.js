@@ -3,6 +3,8 @@ const setup = require('../data/setup');
 const request = require('supertest');
 const app = require('../lib/app');
 
+jest.mock('../lib/utils/github');
+
 describe('alchemy-app routes', () => {
   beforeEach(() => {
     return setup(pool);
@@ -14,10 +16,14 @@ describe('alchemy-app routes', () => {
 
   it('should not allow unauthorized user to POST', async () => {
     const res = await request(app)
-      .get('/api/v1/posts');
+      .post('/api/v1/posts')
+      .send({ 
+        title: 'World is on fire',
+        text: '...and all is fine' 
+      });
 
     expect(res.body).toEqual({
-      message: 'Must be signed in to create a post',
+      message: 'You must be signed in!',
       status: 401
     });
   });

@@ -22,20 +22,13 @@ describe('alchemy-app routes', () => {
     );
   });
 
-  it.skip('it should be able to sign in and redirect users to /posts', async () => {
-    const req = await request
+  it('it should be able to sign in and redirect users to /posts', async () => {
+    const res = await request
       .agent(app)
       .get('/api/v1/github/login/callback?code=42')
       .redirects(1);
 
-    expect(req.body).toEqual({
-      id: expect.any(String),
-      username: 'ari_is_best',
-      email: 'gotcha@fake.com',
-      avatarURL: expect.any(String),
-      exp: expect.any(String),
-      iat: expect.any(String)
-    });
+    expect(res.req.path).toEqual('/api/v1/posts');
   });
 
   it('should be able to delete a users cookie/logs out', async () => {
