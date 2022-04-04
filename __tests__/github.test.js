@@ -22,7 +22,7 @@ describe('alchemy-app routes', () => {
     );
   });
 
-  it('it should be able to sign in and redirect users to /posts', async () => {
+  it.skip('it should be able to sign in and redirect users to /posts', async () => {
     const req = await request
       .agent(app)
       .get('/api/v1/github/login/callback?code=42')
