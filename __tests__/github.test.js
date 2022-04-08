@@ -3,16 +3,7 @@ const setup = require('../data/setup');
 const request = require('supertest');
 const app = require('../lib/app');
 
-jest.mock('../lib/utils/github.js', () => {
-  return {
-    exchangeCodeForToken: async (_code) => 'MOCKED_TOKEN',
-    getGithubProfile: async (_token) => ({
-      username: 'ariIsBest',
-      email: 'fake@email.com',
-      avatar_url: 'https://photo.com/photo.jpg',
-    }),
-  };
-});
+jest.mock('../lib/utils/github.js');
 
 describe('alchemy-app routes', () => {
   beforeEach(() => {
