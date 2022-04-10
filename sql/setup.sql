@@ -2,6 +2,7 @@
 -- The SQL in this file will be executed when you run `npm run setup-db`
 DROP TABLE IF EXISTS users CASCADE;
 DROP TABLE IF EXISTS posts CASCADE;
+DROP TABLE IF EXISTS quotes CASCADE;
 
 CREATE TABLE users (
   id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
