@@ -6,7 +6,7 @@ DROP TABLE IF EXISTS posts CASCADE;
 CREATE TABLE users (
   id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
   username TEXT NOT NULL,
-  email TEXT NOT NULL,
+  email TEXT,
   avatar_url TEXT
 );
 
