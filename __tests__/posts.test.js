@@ -18,8 +18,8 @@ describe('alchemy-app routes', () => {
     const res = await request(app)
       .post('/api/v1/posts')
       .send({ 
-        title: 'World is on fire',
-        text: '...and all is fine' 
+        title: 'My first post',
+        text: 'Oh my glob, I love to post.' 
       });
 
     expect(res.body).toEqual({

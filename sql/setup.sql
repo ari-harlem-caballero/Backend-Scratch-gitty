@@ -6,15 +6,15 @@ DROP TABLE IF EXISTS quotes CASCADE;
 
 CREATE TABLE users (
   id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
-  username TEXT NOT NULL,
-  email TEXT NOT NULL,
+  username TEXT,
+  email TEXT,
   avatar_url TEXT
 );
 
 CREATE TABLE posts (
   id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
-  title TEXT NOT NULL,
-  text VARCHAR(255) NOT NULL,
+  title TEXT,
+  text VARCHAR(255),
   created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
 );
 
@@ -24,8 +24,7 @@ CREATE TABLE quotes (
   content TEXT NOT NULL
 );
 
-INSERT INTO 
-  posts (title, text)
-VALUES 
-  ('My first post', 'Oh my glob, I love to post.'), 
-  ('Follow-up post', 'Butts.');
+-- INSERT INTO 
+--   posts (title, text)
+-- VALUES 
+--   ('My first post', 'Oh my glob, I love to post.');
